@@ -22,15 +22,23 @@
     </thead>
     <tbody>
       @foreach($book as $books)
-      @php
+      /*
+      *Podes usar o Relacionamento aqui
+      *não precisa fazer uma requisição a DB para todos os livros existentes 
+      *
+      */
+      /*@php
       
       $user=$books->find($books->id)->relUsers;
 
-      @endphp
+      @endphp*/
         <tr>
         <th scope="row"> {{$books->id}}</th>
         <td> {{$books->title}}</td>
-        <td>{{$user->name}}</td>
+        <td>
+            @isset($books->relUsers)
+                {{$books->relUsers->name}}
+            @endisset</td>
         <td>{{$books->price}}</td>
         <td>
           <a href='{{url("books/$books->id")}}'>
